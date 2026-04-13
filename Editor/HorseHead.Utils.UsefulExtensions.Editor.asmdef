@@ -1,8 +1,10 @@
 {
-    "name": "UsefulExtensions",
-    "rootNamespace": "UsefulExtensions",
+    "name": "HorseHead.Utils.UsefulExtensions.Editor",
+    "rootNamespace": "HorseHead.Utils.UsefulExtensions.Editor",
     "references": [],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
