@@ -10,12 +10,16 @@ namespace HorseHead.Utils.UsefulExtensions.Editor
             if (style == null)
                 style = GUI.skin.label; // default label style
 
-            style.alignment = TextAnchor.MiddleCenter;
-            style.fontSize = GetDynamicFontSize(position, 35f, 500f, 5, 25);
+            // 2. DO NOT modify GUI.skin.label directly. 
+            // Create a copy so we don't mess up the Inspector UI.
+            GUIStyle tempStyle = style != null ? new GUIStyle(style) : new GUIStyle(GUI.skin.label);
 
-            //style.fontSize = 500;
+            tempStyle.alignment = TextAnchor.MiddleCenter;
+            tempStyle.fontSize = GetDynamicFontSize(position, 35f, 500f, 5, 25);
+
+            //tempStyle.fontSize = 500;
             // Calculate text size
-            Vector2 size = style.CalcSize(new GUIContent(text));
+            Vector2 size = tempStyle.CalcSize(new GUIContent(text));
 
             // Convert world position to GUI point
             Vector3 screenPoint = HandleUtility.WorldToGUIPoint(position);
@@ -30,7 +34,7 @@ namespace HorseHead.Utils.UsefulExtensions.Editor
 
             // Draw in GUI space
             Handles.BeginGUI();
-            GUI.Label(rect, text, style);
+            GUI.Label(rect, text, tempStyle);
             Handles.EndGUI();
         }
 
