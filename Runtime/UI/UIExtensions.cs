@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UsefulExtensions.UIExtensions
 {
@@ -68,6 +69,17 @@ namespace UsefulExtensions.UIExtensions
 
             UnityEngine.Vector3 worldPos = cameraPos + cameraPosition;
             return worldPos;
+        }
+
+        public static void RefreshLayoutGroupsImmediate(GameObject root)
+        {
+            // Find all layout groups in children and force them to rebuild
+            var layoutGroups = root.GetComponentsInChildren<LayoutGroup>();
+
+            foreach (var layoutGroup in layoutGroups)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(layoutGroup.GetComponent<RectTransform>());
+            }
         }
     }
 }
